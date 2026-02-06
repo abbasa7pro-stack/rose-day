@@ -20,18 +20,25 @@ body {
   text-align: center;
 }
 
+/* Fade in */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
 h1 {
   font-weight: normal;
   margin-bottom: 10px;
   opacity: 0;
   animation: fadeIn 2s forwards;
+  pointer-events: none;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
+/* ROSE */
+#rose {
+  position: relative;
+  z-index: 10;
 }
 
-/* Rose */
 #rose img {
   width: 160px;
   margin: 25px 0;
@@ -39,6 +46,7 @@ h1 {
   animation: breathe 5s ease-in-out infinite;
   filter: drop-shadow(0 12px 28px rgba(255,80,120,0.7));
   transition: transform 0.4s ease, filter 0.4s ease;
+  pointer-events: auto;
 }
 
 @keyframes breathe {
@@ -55,7 +63,7 @@ h1 {
   filter: drop-shadow(0 0 40px rgba(255,120,160,1));
 }
 
-/* Message */
+/* MESSAGE */
 #message {
   font-size: 16px;
   max-width: 320px;
@@ -64,9 +72,10 @@ h1 {
   opacity: 0;
   animation: fadeIn 2s forwards;
   animation-delay: 1.5s;
+  pointer-events: none;
 }
 
-/* Final paragraph */
+/* FINAL PARAGRAPH */
 #finalMessage {
   font-size: 18px;
   max-width: 360px;
@@ -75,6 +84,7 @@ h1 {
   opacity: 0;
   transform: translateY(25px);
   transition: opacity 2.5s ease, transform 2.5s ease;
+  pointer-events: none;
 }
 
 #finalMessage.show {
@@ -82,7 +92,7 @@ h1 {
   transform: translateY(0);
 }
 
-/* Petals */
+/* PETALS */
 .petal {
   position: absolute;
   top: -30px;
@@ -115,4 +125,60 @@ h1 {
 
 <div id="finalMessage">
   Zainy, if I could explain what you mean to me,
-  I
+  I’d still fall short — so I made this instead.
+  Every little movement, every pause,
+  was meant to feel the way you make me feel.
+  Calm. Warm. Certain.
+  Somehow, you turned ordinary moments into my favourite ones,
+  and now even silence feels better when it reminds me of you.
+  If love had a shape, it would look like this —
+  steady, quiet, and meant only for you.
+  <br><br>
+  — Abbas
+</div>
+
+<script>
+const rose = document.querySelector("#rose img");
+const msg = document.getElementById("message");
+const finalMsg = document.getElementById("finalMessage");
+
+const lines = [
+  "I was picked just for you…",
+  "I breathe when you’re near.",
+  "Every petal holds a thought.",
+  "And every thought… is you."
+];
+
+let step = 0;
+let petalsDropped = false;
+
+rose.addEventListener("click", () => {
+  rose.classList.add("glow");
+  setTimeout(() => rose.classList.remove("glow"), 600);
+
+  if (step < lines.length) {
+    msg.textContent = lines[step];
+    step++;
+  }
+
+  if (step === lines.length && !petalsDropped) {
+    petalsDropped = true;
+    dropPetals();
+    finalMsg.classList.add("show");
+  }
+});
+
+function dropPetals() {
+  for (let i = 0; i < 24; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = 4 + Math.random() * 3 + "s";
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 7000);
+  }
+}
+</script>
+
+</body>
+</html>
