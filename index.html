@@ -1,119 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Rose Day 🌹</title>
+  <meta charset="UTF-8" />
+  <title>For Zainy 🌹</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: radial-gradient(circle at top, #1a1a1a, #000);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Georgia", serif;
-  color: #fff;
-  overflow: hidden;
-}
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(circle at top, #2b0a0f, #000);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      font-family: "Georgia", serif;
+      overflow: hidden;
+      text-align: center;
+    }
 
-/* Container */
-#container {
-  text-align: center;
-  max-width: 320px;
-}
+    h1 {
+      font-size: 26px;
+      font-weight: normal;
+      margin-bottom: 25px;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+    }
 
-/* Rose */
-#rose {
-  font-size: 90px;
-  cursor: pointer;
-  animation: sway 4s ease-in-out infinite;
-  display: inline-block;
-}
+    /* Rose */
+    #rose img {
+      width: 120px;
+      cursor: pointer;
+      animation: breathe 5s ease-in-out infinite;
+      filter: drop-shadow(0 8px 18px rgba(255,80,100,0.6));
+      transition: transform 0.6s, filter 0.6s;
+    }
 
-/* Gentle breathing sway */
-@keyframes sway {
-  0%   { transform: rotate(-2deg) scale(1); }
-  50%  { transform: rotate(2deg) scale(1.03); }
-  100% { transform: rotate(-2deg) scale(1); }
-}
+    @keyframes breathe {
+      0%   { transform: scale(1) rotate(-1deg); }
+      50%  { transform: scale(1.06) rotate(1deg); }
+      100% { transform: scale(1) rotate(-1deg); }
+    }
 
-/* Text */
-#text {
-  margin-top: 20px;
-  font-size: 18px;
-  line-height: 1.6;
-  min-height: 120px;
-  transition: opacity 1s;
-}
+    .glow img {
+      filter: drop-shadow(0 0 30px rgba(255,120,150,0.9));
+    }
 
-/* Petals */
-.petal {
-  position: fixed;
-  top: -10px;
-  font-size: 22px;
-  animation: fall linear forwards;
-  pointer-events: none;
-}
+    p {
+      margin-top: 30px;
+      font-size: 16px;
+      max-width: 300px;
+      line-height: 1.6;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+      animation-delay: 1.5s;
+    }
 
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-    opacity: 0;
-  }
-}
-</style>
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* Petals */
+    .petal {
+      position: absolute;
+      top: -40px;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle, #ff5f7e, #b11226);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      opacity: 0.8;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div id="container">
-  <div id="rose">🌹</div>
-  <div id="text">Some things open only when you’re gentle.</div>
-</div>
+  <h1>For you, Zainy 🌹</h1>
 
-<script>
-let step = 0;
-const rose = document.getElementById("rose");
-const text = document.getElementById("text");
+  <div id="rose">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Rose_flower.svg"
+      alt="Rose"
+    />
+  </div>
 
-rose.addEventListener("click", () => {
-  step++;
+  <p>
+    This rose breathes softly,<br>
+    just like my thoughts of you.<br><br>
+    Tap it once —<br>
+    and let it fall for you.
+  </p>
 
-  if (step === 1) {
-    rose.textContent = "🌹";
-    text.innerHTML = "Not everything reveals itself at once.";
-  }
+  <script>
+    const rose = document.getElementById("rose");
+    let petalsDropped = false;
 
-  if (step === 2) {
-    rose.textContent = "🌸";
-    text.innerHTML = "Some feelings grow quietly.<br>Without asking for attention.";
-  }
+    rose.addEventListener("click", () => {
+      rose.classList.add("glow");
+      setTimeout(() => rose.classList.remove("glow"), 600);
 
-  if (step === 3) {
-    rose.textContent = "🌺";
-    text.innerHTML = 
-      "I didn’t give you this rose to impress you.<br><br>" +
-      "I gave it because you already matter.<br><br>" +
-      "Happy Rose Day, Zainy 🌹<br>— Abbas";
+      if (!petalsDropped) {
+        petalsDropped = true;
+        dropPetals();
+      }
+    });
 
-    dropPetals();
-  }
-});
+    function dropPetals() {
+      for (let i = 0; i < 18; i++) {
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.style.left = Math.random() * 100 + "vw";
+        petal.style.animationDuration = 4 + Math.random() * 3 + "s";
+        document.body.appendChild(petal);
 
-/* Petals fall once */
-function dropPetals() {
-  for (let i = 0; i < 18; i++) {
-    const petal = document.createElement("div");
-    petal.className = "petal";
-    petal.textContent = "🌸";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = (Math.random() * 3 + 4) + "s";
-    document.body.appendChild(petal);
-    setTimeout(() => petal.remove(), 7000);
-  }
-}
-</script>
+        setTimeout(() => petal.remove(), 7000);
+      }
+    }
+  </script>
 
 </body>
 </html>
