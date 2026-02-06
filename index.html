@@ -33,18 +33,18 @@ h1 {
 
 /* Rose */
 #rose img {
-  width: 130px;
+  width: 160px;
   margin: 25px 0;
   cursor: pointer;
   animation: breathe 5s ease-in-out infinite;
-  filter: drop-shadow(0 10px 20px rgba(255,80,100,0.6));
-  transition: transform 0.3s, filter 0.3s;
+  filter: drop-shadow(0 12px 28px rgba(255,80,120,0.7));
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
 
 @keyframes breathe {
-  0% { transform: scale(1) rotate(-1deg); }
-  50% { transform: scale(1.08) rotate(1deg); }
-  100% { transform: scale(1) rotate(-1deg); }
+  0% { transform: scale(1) rotate(-0.8deg); }
+  50% { transform: scale(1.07) rotate(0.8deg); }
+  100% { transform: scale(1) rotate(-0.8deg); }
 }
 
 #rose img:hover {
@@ -52,13 +52,13 @@ h1 {
 }
 
 .glow {
-  filter: drop-shadow(0 0 35px rgba(255,120,160,0.9));
+  filter: drop-shadow(0 0 40px rgba(255,120,160,1));
 }
 
 /* Message */
 #message {
   font-size: 16px;
-  max-width: 300px;
+  max-width: 320px;
   min-height: 60px;
   line-height: 1.6;
   opacity: 0;
@@ -69,12 +69,12 @@ h1 {
 /* Final paragraph */
 #finalMessage {
   font-size: 18px;
-  max-width: 340px;
+  max-width: 360px;
   line-height: 1.8;
   margin-top: 25px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 2s ease, transform 2s ease;
+  transform: translateY(25px);
+  transition: opacity 2.5s ease, transform 2.5s ease;
 }
 
 #finalMessage.show {
@@ -86,8 +86,8 @@ h1 {
 .petal {
   position: absolute;
   top: -30px;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   background: radial-gradient(circle, #ff6b8a, #b11226);
   border-radius: 50% 50% 50% 0;
   transform: rotate(45deg);
@@ -108,67 +108,11 @@ h1 {
 <h1>For you, Zainy 🌹</h1>
 
 <div id="rose">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Rose_flower.svg" alt="Rose">
+  <img src="rose.png" alt="Rose">
 </div>
 
 <div id="message">Touch the rose…</div>
 
 <div id="finalMessage">
   Zainy, if I could explain what you mean to me,
-  I’d still fall short — so I made this instead.
-  Every little movement, every pause,
-  was meant to feel the way you make me feel.
-  Calm. Warm. Certain.
-  Somehow, you turned ordinary moments into my favourite ones,
-  and now even silence feels better when it reminds me of you.
-  If love had a shape, it would look like this —
-  steady, quiet, and meant only for you.
-  <br><br>
-  — Abbas
-</div>
-
-<script>
-const rose = document.querySelector("#rose img");
-const msg = document.getElementById("message");
-const finalMsg = document.getElementById("finalMessage");
-
-const lines = [
-  "I was picked just for you…",
-  "I breathe when you’re near.",
-  "Every petal holds a thought.",
-  "And every thought… is you."
-];
-
-let step = 0;
-let petalsDropped = false;
-
-rose.addEventListener("click", () => {
-  rose.classList.add("glow");
-  setTimeout(() => rose.classList.remove("glow"), 500);
-
-  if (step < lines.length) {
-    msg.textContent = lines[step];
-    step++;
-  }
-
-  if (step === lines.length && !petalsDropped) {
-    petalsDropped = true;
-    dropPetals();
-    finalMsg.classList.add("show");
-  }
-});
-
-function dropPetals() {
-  for (let i = 0; i < 22; i++) {
-    const petal = document.createElement("div");
-    petal.className = "petal";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = 4 + Math.random() * 3 + "s";
-    document.body.appendChild(petal);
-    setTimeout(() => petal.remove(), 7000);
-  }
-}
-</script>
-
-</body>
-</html>
+  I
