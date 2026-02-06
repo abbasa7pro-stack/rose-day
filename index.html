@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Rose Day 🌹</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at top, #1a1a1a, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Georgia", serif;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Container */
+#container {
+  text-align: center;
+  max-width: 320px;
+}
+
+/* Rose */
+#rose {
+  font-size: 90px;
+  cursor: pointer;
+  animation: sway 4s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Gentle breathing sway */
+@keyframes sway {
+  0%   { transform: rotate(-2deg) scale(1); }
+  50%  { transform: rotate(2deg) scale(1.03); }
+  100% { transform: rotate(-2deg) scale(1); }
+}
+
+/* Text */
+#text {
+  margin-top: 20px;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 120px;
+  transition: opacity 1s;
+}
+
+/* Petals */
+.petal {
+  position: fixed;
+  top: -10px;
+  font-size: 22px;
+  animation: fall linear forwards;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="container">
+  <div id="rose">🌹</div>
+  <div id="text">Some things open only when you’re gentle.</div>
+</div>
+
+<script>
+let step = 0;
+const rose = document.getElementById("rose");
+const text = document.getElementById("text");
+
+rose.addEventListener("click", () => {
+  step++;
+
+  if (step === 1) {
+    rose.textContent = "🌹";
+    text.innerHTML = "Not everything reveals itself at once.";
+  }
+
+  if (step === 2) {
+    rose.textContent = "🌸";
+    text.innerHTML = "Some feelings grow quietly.<br>Without asking for attention.";
+  }
+
+  if (step === 3) {
+    rose.textContent = "🌺";
+    text.innerHTML = 
+      "I didn’t give you this rose to impress you.<br><br>" +
+      "I gave it because you already matter.<br><br>" +
+      "Happy Rose Day, Zainy 🌹<br>— Abbas";
+
+    dropPetals();
+  }
+});
+
+/* Petals fall once */
+function dropPetals() {
+  for (let i = 0; i < 18; i++) {
+    const petal = document.createElement("div");
+    petal.className = "petal";
+    petal.textContent = "🌸";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = (Math.random() * 3 + 4) + "s";
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 7000);
+  }
+}
+</script>
+
+</body>
+</html>
